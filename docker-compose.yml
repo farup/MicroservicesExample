@@ -10,6 +10,8 @@ services:
       - PORT= 9001
     volumes:
       - "./events/:/app"
+    networks:
+      - my-network
 
   tickets:
     build: ./tickets/
@@ -20,3 +22,17 @@ services:
       - PORT= 9002
     volumes:
       - "./tickets/:/app"
+
+  consul:
+    image: consul:latest
+    container_name: consul
+    command: "agent -dev -config-dir=/consul/config"
+    ports:
+      - "8500:8500"
+    volumes:
+      - ./events/events.hcl:/consul/config/events.hcl
+    networks:
+      - my-network
+
+networks:
+  my-network:
