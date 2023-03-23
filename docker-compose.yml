@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+
+  events:
+    build: ./events/
+    ports:
+      - 8081:9001
+    container_name: events
+    environment:
+      - PORT= 9001
+    volumes:
+      - "./events/:/app"
+
+  tickets:
+    build: ./tickets/
+    ports:
+      - 8082:9002
+    container_name: tickets
+    environment:
+      - PORT= 9002
+    volumes:
+      - "./tickets/:/app"
