@@ -8,10 +8,11 @@ services:
     container_name: events
     environment:
       - PORT= 9001
+      - SERVICE_NAME=events
     volumes:
       - "./events/:/app"
-    networks:
-      - my-network
+    # networks:
+    #   - my-network
 
   tickets:
     build: ./tickets/
@@ -19,9 +20,11 @@ services:
       - 9002:9002
     container_name: tickets
     environment:
-      - PORT= 9002
+      - PORT=9002
     volumes:
       - "./tickets/:/app"
+    depends_on:
+      - consul
 
   consul:
     image: consul:latest
@@ -29,10 +32,10 @@ services:
     command: "agent -server -bootstrap-expect=1 -ui -client 0.0.0.0"
     ports:
       - "8500:8500"
-    volumes:
-      - ./events/events.hcl:/consul/config/events.hcl
-    networks:
-      - my-network
+    # volumes:
+    #   - ./events/events.hcl:/consul/config/events.hcl
+    # networks:
+    #   - my-network
 
 networks:
   my-network:
