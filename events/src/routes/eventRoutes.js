@@ -1,5 +1,5 @@
 const { Router } = require('express');
-
+const { getIpAddress } = require('../networking/ipAddress')
 
 
 const events = []
@@ -9,7 +9,9 @@ const eventRouter = Router()
 // Home 
 // req is incoming data, res is data sent back to client.
 eventRouter.get('/', (req, res) => {
-    res.send('Welcome. Get, add, delete and test out with events/!!')
+    ip = getIpAddress()
+    res.send('Welcome. Get, add, delete and test out with events/!!').json(ip)
+
 })
 
 

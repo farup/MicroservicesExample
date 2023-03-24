@@ -4,7 +4,7 @@ services:
   events:
     build: ./events/
     ports:
-      - 8081:9001
+      - 9001:9001
     container_name: events
     environment:
       - PORT= 9001
@@ -16,7 +16,7 @@ services:
   tickets:
     build: ./tickets/
     ports:
-      - 8082:9002
+      - 9002:9002
     container_name: tickets
     environment:
       - PORT= 9002
@@ -26,7 +26,7 @@ services:
   consul:
     image: consul:latest
     container_name: consul
-    command: "agent -dev -config-dir=/consul/config"
+    command: "agent -server -bootstrap-expect=1 -ui -client 0.0.0.0"
     ports:
       - "8500:8500"
     volumes:
