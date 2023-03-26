@@ -7,12 +7,14 @@ services:
       - 9001:9001
     container_name: events
     environment:
-      - PORT= 9001
+      - PORT=9001
       - SERVICE_NAME=events
+      - MONDODB_URL=mongodb://ticketsdb:27017/eventsdb1
     volumes:
-      - "./events/:/app"
-    # networks:
-    #   - my-network
+      - ./events/:/app
+    depends_on:
+      - consul
+      - eventsdb
 
   tickets:
     build: ./tickets/
@@ -21,21 +23,42 @@ services:
     container_name: tickets
     environment:
       - PORT=9002
+      - SERVICE_NAME=tickets
+      - MONDODB_URL=mongodb://ticketsdb:27017/ticketsdb1
     volumes:
-      - "./tickets/:/app"
+      - ./tickets/:/app
     depends_on:
       - consul
+      - ticketsdb
+
+  eventsdb:
+    container_name: eventsdb
+    image: mongo
+    volumes:
+      - eventsdata:/data/db
+
+  ticketsdb:
+    container_name: ticketsdb
+    image: mongo
+    volumes:
+      - ticketsdata:/data/db
 
   consul:
     image: consul:latest
     container_name: consul
     command: "agent -server -bootstrap-expect=1 -ui -client 0.0.0.0"
     ports:
+      - "8400:8400"
       - "8500:8500"
-    # volumes:
-    #   - ./events/events.hcl:/consul/config/events.hcl
+      - "8600:8600"
+      - "8600:8600/udp"
+
+volumes:
+  # - ./events/events.hcl:/consul/config/events.hcl
+  ticketsdata:
+  eventsdata:
     # networks:
     #   - my-network
 
-networks:
-  my-network:
+    # networks:
+    #   my-network:
