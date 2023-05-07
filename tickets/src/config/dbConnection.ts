@@ -1,11 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const dbConnection = async () => {
     try {
-        await mongoose.connect(process.env.MONDODB_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect('mongodb://tickets-mongo-service:27017/tickets');
         console.log('DB online');
 
     } catch (error) {
@@ -14,4 +11,4 @@ const dbConnection = async () => {
     }
 }
 
-module.exports = dbConnection
+export { dbConnection }

@@ -19,6 +19,13 @@ Nodejs is a fast and scalable runtime environment for building the server-side u
 An efficient way to build and deploy applications. Application and all its dependencies are “packed” into a image, which can be ran as a lightweight container. This project uses a docker-compose file which coordinates the executing of docker file inside each services and prebuild images (consul, mongo)
 
 
+### Kubernets
+
+Kubernets cluster conists of kubernets nodes. Each node has a one or more pods inside of it. This application has one pod per node. Each pod run one docker container, which runs a NodeJS application. 
+
+For pod to communicate between each other, ClusterIP Service. This a kubernets service just used for communication. 
+
+
 ### Consul.io 
 
 Consul is a communications engine and used in this project for self-registry and discovery of other services. This enables services to locate and communicate with each other without requiring prior knowledge of each other's location or network address. Health checks and load balancing for optimizing the network. 

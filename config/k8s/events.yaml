@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: events
+spec: 
+  containers: 
+   - name: events
+     image: terjenf/events:0.0.1
