@@ -9,7 +9,6 @@ const Consul = require('consul')
 const consul = new Consul();
 
 
-
 console.log("-----This is from index.js Tickets!-----")
 const ab = async () => {
     return await consul.acl.replication()
@@ -53,7 +52,7 @@ function registerService() {
 const startServer = () => {
     try {
         server.listen(PORT, () =>
-            console.log(`Event server running at http://localhost:${PORT}`))
+            console.log(`Ticket server running at http://localhost:${PORT}`))
     } catch (error) {
         console.error('Error registering with Consul:', error);
     }
