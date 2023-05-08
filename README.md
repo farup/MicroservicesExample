@@ -4,9 +4,7 @@ In contrast to a monolithic approach, where all components are a part of a singl
 
 Microservices approach opens for betters scaling and updating (don’t need to redeploy the entire application on each update), different tech stacks. Downsides; introduces complexity from a distributed system, communication between services etc…
 
-This project consist of two microservices, “events” and “tickets”, built from “scratch” along with consul-, caddy- and mongo services (future). Goal is develop a dynamic microservices application. 
-
-Simplified project from the course "Contemporary Software Development" at UNIBZ
+This project consist of two microservices, “events” and “tickets”, dockerized and adminstrated by kubernets. 
 
 
 ### Node.js
@@ -24,17 +22,3 @@ An efficient way to build and deploy applications. Application and all its depen
 Kubernets cluster conists of kubernets nodes. Each node has a one or more pods inside of it. This application has one pod per node. Each pod run one docker container, which runs a NodeJS application. 
 
 For pod to communicate between each other, ClusterIP Service. This a kubernets service just used for communication. 
-
-
-### Consul.io 
-
-Consul is a communications engine and used in this project for self-registry and discovery of other services. This enables services to locate and communicate with each other without requiring prior knowledge of each other's location or network address. Health checks and load balancing for optimizing the network. 
-
-In this case a consul server is spun up by docker-compose file (kind of works as the leader), while consul clients runs on each services and communicates with the consul servers. So far, I have had some trouble getting the services registry up and running. Tried implemented both with the consul agent API and HCL config file. 
-
-
-### Caddy 
-todo
-
-### RabbitMQ
-todo
