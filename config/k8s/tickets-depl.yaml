@@ -14,7 +14,7 @@ spec:
     spec:
       containers: 
         - name: tickets 
-          image: terjenf/tickets:0.0.1
+          image: terjenf/tickets
 ---
 apiVersion: v1
 kind: Service
